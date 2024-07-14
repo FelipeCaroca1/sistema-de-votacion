@@ -1,10 +1,11 @@
+//Almacenar preguntas, opciones y votos en la clase encuesta
 class Encuesta {
     constructor(question, options) {
         this.question = question;
         this.options = options;
         this.votes = {};
     }
-
+//Almacena votos mostrando como resultado en que opcion se almacenó
     votar(index_option) {
         if (index_option < this.options.length) {
 
@@ -27,7 +28,7 @@ class Encuesta {
         })
     }
 }
-
+//Almacena cantidades "x" de la clase encuesta
 class Encuestas {
     constructor() {
         this.encuestas = []
@@ -53,6 +54,7 @@ class Encuestas {
             console.log('Esta encuesta no existe')
         }
     };
+    //Función para mostrar las diferentes encuestas
     listarEncuestas() {
         this.encuestas.forEach((encuesta, index) => {
             console.log(`${index}: ${encuesta.question}`)
