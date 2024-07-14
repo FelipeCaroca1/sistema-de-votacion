@@ -1,46 +1,82 @@
-const questionario = [];
- 
-class crearEncuesta {
+class Encuesta {
     constructor(question, options) {
         this.question = question;
         this.options = options;
+        this.votes = {};
     }
-}
- 
-let cantidadEncuestas = parseInt(prompt(`Ingrese el número de preguntas a responder`), 10);
- 
-if (cantidadEncuestas >= 8) {
-    for (let i = 0; i < cantidadEncuestas; i++) {
-        let question = prompt(`Por favor, ingrese la pregunta:`);
-        let options = prompt(`Por favor, ingrese sus opciones, separadas por comas:`);
-        let nuevaEncuesta = new crearEncuesta(question, options);
-        questionario.push(nuevaEncuesta);
-    }
-    console.log("Comencemos", questionario);
-} else {
-    console.log("Lo sentimos, el número mínimo de preguntas es 8");
-}
- 
-var respuestas = [];
- 
-function votar(questionario) {
-    console.log("Bienvenido al cuestionario, por favor siga estas instrucciones");
-    for (let i = 0; i < questionario.length; i++) {
-        console.log(`La pregunta es: ${questionario[i].question} y las opciones son: ${questionario[i].options}`);
-        let respuesta;
-        let respuestaValida = false;
- 
-        while (!respuestaValida) {
-            respuesta = prompt(`Elija su respuesta a la pregunta: ${questionario[i].question} (opciones: ${questionario[i].options})`);
-            if (questionario[i].options.includes(respuesta)) {
-                respuestaValida = true;
-                respuestas.push(respuesta);
-                console.log(`Su respuesta a la pregunta: ${questionario[i].question} es: ${respuesta}`);
-            } else {
-                console.log(`Respuesta inválida. Por favor, elija una de las siguientes opciones: ${questionario[i].options}`);
+
+    votar(index_option) {
+        if (index_option < this.options.length) {
+
+            if (this.votes[index_option] === undefined) {
+                this.votes[index_option] = 0;
             }
+
+            this.votes[index_option]++;
+            console.log(`¡Has votado por "${this.options[index_option]}" en la encuesta: ${this.question}!`);
+        } else {
+            console.log('La opción seleccionada no existe.');
+        }
+        this.verResultados();
+    }
+
+    verResultados() {
+        console.log(`Resultados de la encuesta: ${this.question}`);
+        this.options.forEach((opcion, index) => {
+            console.log(`    ${opcion}: ${this.votes[index] ?? 0} votos`);
+        })
+    }
+}
+
+class Encuestas {
+    constructor() {
+        this.encuestas = []
+    }
+
+    crearEncuesta(arg_pregunta, arg_opciones) {
+        this.encuestas.push(new Encuesta(arg_pregunta, arg_opciones));
+    };
+    verResultados(index) {
+        if (index) {
+            this.encuestas[index].verResultados();
+        } else {
+            this.encuestas.forEach(encuesta => {
+                encuesta.verResultados();
+            })  
         }
     }
-    console.log("GRACIAS POR SU PARTICIPACIÓN");
+    votar(index_pregunta, index_opcion) {
+        const encuesta = this.encuestas[index_pregunta];
+        if (encuesta) {
+            encuesta.votar(index_opcion);
+        } else {
+            console.log('Esta encuesta no existe')
+        }
+    };
+    listarEncuestas() {
+        this.encuestas.forEach((encuesta, index) => {
+            console.log(`${index}: ${encuesta.question}`)
+
+            encuesta.options.forEach((opcion, index_opcion) => {
+                console.log(`    ${index_opcion}: ${opcion}`)
+            })
+
+        })
+    }
 }
-votar(questionario)
+
+const x = new Encuestas()
+
+x.crearEncuesta('¿Cuál es tu estacion favorita?', ['Otoño', 'Invierno', 'Primavera', 'Verano']);
+x.crearEncuesta('¿Cuál es tu raza de perro favorita?', ['Chihuahua', 'Quiltro', 'Labrador', 'Salchicha']);
+x.crearEncuesta('¿Cuál de estos generos de peliculas te gusta más ?', ['Drama', 'Acción', 'Fantasía', 'Comedia']);
+x.crearEncuesta('¿Cuál disciplina de baile te gusta más?', ['Clásica', 'Ballroom', 'Danza contemporanea', 'Danza urbana']);
+x.crearEncuesta('¿Tanganinca o Tangananá?', ['Tangananica', 'Tangananá']);
+x.crearEncuesta('¿Cuál es tu signo del zodiaco?', ['Aries', 'Tauro', 'Géminis', 'Cáncer', 'Leo', 'Virgo','Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis']);
+x.crearEncuesta('¿Cuál es tu comida favorita?', ['Casera Chilena', 'Peruana', 'China', 'Francesa', 'Italiana', 'Japonesa', 'Comida Rápida']);
+x.crearEncuesta('¿Fumas?', ['Si', 'No', 'fumar qué?']);
+
+x.votar(0, 1)
+x.votar(0, 2)
+
+
