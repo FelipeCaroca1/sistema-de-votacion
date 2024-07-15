@@ -2,7 +2,7 @@
 const encuestas = []
 
 //Función para crear una nueva encuesta
-// arg_argumento
+// *arg: argumento
 const crearEncuesta = (arg_pregunta, arg_opciones) => {
     encuestas.push({
         pregunta: arg_pregunta,
@@ -47,7 +47,7 @@ const listarEncuestas = () => {
         console.log(`${index}: ${encuesta.pregunta}`)
 
         encuesta.opciones.forEach((opcion, index_opcion) => {
-            console.log(`${index_opcion}: ${opcion}`)
+            console.log(`${index_opcion}:   ${opcion}`)
         })
 
     })
@@ -59,7 +59,7 @@ crearEncuesta('¿Cuál es tu raza de perro favorita?', ['Chihuahua', 'Quiltro', 
 crearEncuesta('¿Cuál de estos generos de peliculas te gusta más ?', ['Drama', 'Acción', 'Fantasía', 'Comedia']);
 crearEncuesta('¿Cuál disciplina de baile te gusta más?', ['Clásica', 'Ballroom', 'Danza contemporanea', 'Danza urbana']);
 crearEncuesta('¿Tanganinca o Tangananá?', ['Tangananica', 'Tangananá']);
-crearEncuesta('¿Cuál es tu signo del zodiaco?', ['Aries', 'Tauro', 'Géminis', 'Cáncer', 'Leo', 'Virgo','Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis']);
+crearEncuesta('¿Cuál es tu signo del zodiaco?', ['Aries','Tauro','Géminis','Cáncer', 'Leo', 'Virgo','Libra', 'Escorpio', 'Sagitario','Capricornio','Acuario','Piscis']);
 crearEncuesta('¿Cuál es tu comida favorita?', ['Casera Chilena', 'Peruana', 'China', 'Francesa', 'Italiana', 'Japonesa', 'Comida Rápida']);
 crearEncuesta('¿Fumas?', ['Si', 'No', 'fumar qué?']);
 
