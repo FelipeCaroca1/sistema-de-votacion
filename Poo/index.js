@@ -20,11 +20,11 @@ class Encuesta {
         }
         this.verResultados();
     }
-
+//Funcion para mostrar los resultados de la clase encuesta
     verResultados() {
         console.log(`Resultados de la encuesta: ${this.question}`);
         this.options.forEach((opcion, index) => {
-            console.log(`    ${opcion}: ${this.votes[index] ?? 0} votos`);
+            console.log(`    ${index} ${opcion}: ${this.votes[index] ?? 0} votos`);
         })
     }
 }
@@ -54,31 +54,29 @@ class Encuestas {
             console.log('Esta encuesta no existe')
         }
     };
-    //Función para mostrar las diferentes encuestas
+//Función para mostrar las diferentes encuestas y resultados
     listarEncuestas() {
         this.encuestas.forEach((encuesta, index) => {
             console.log(`${index}: ${encuesta.question}`)
 
-            encuesta.options.forEach((opcion, index_opcion) => {
-                console.log(`    ${index_opcion}: ${opcion}`)
-            })
+            encuesta.verResultados();
 
         })
     }
 }
+//Usar "encuestas." para usar las diferentes funciones del codigo
+const encuestas = new Encuestas()
 
-const x = new Encuestas()
+encuestas.crearEncuesta('¿Cuál es tu estacion favorita?', ['Otoño', 'Invierno', 'Primavera', 'Verano']);
+encuestas.crearEncuesta('¿Cuál es tu raza de perro favorita?', ['Chihuahua', 'Quiltro', 'Labrador', 'Salchicha']);
+encuestas.crearEncuesta('¿Cuál de estos generos de peliculas te gusta más ?', ['Drama', 'Acción', 'Fantasía', 'Comedia']);
+encuestas.crearEncuesta('¿Cuál disciplina de baile te gusta más?', ['Clásica', 'Ballroom', 'Danza contemporanea', 'Danza urbana']);
+encuestas.crearEncuesta('¿Tanganinca o Tangananá?', ['Tangananica', 'Tangananá']);
+encuestas.crearEncuesta('¿Cuál es tu signo del zodiaco?', ['Aries', 'Tauro', 'Géminis', 'Cáncer', 'Leo', 'Virgo','Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis']);
+encuestas.crearEncuesta('¿Cuál es tu comida favorita?', ['Casera Chilena', 'Peruana', 'China', 'Francesa', 'Italiana', 'Japonesa', 'Comida Rápida']);
+encuestas.crearEncuesta('¿Fumas?', ['Si', 'No', 'fumar qué?']);
 
-x.crearEncuesta('¿Cuál es tu estacion favorita?', ['Otoño', 'Invierno', 'Primavera', 'Verano']);
-x.crearEncuesta('¿Cuál es tu raza de perro favorita?', ['Chihuahua', 'Quiltro', 'Labrador', 'Salchicha']);
-x.crearEncuesta('¿Cuál de estos generos de peliculas te gusta más ?', ['Drama', 'Acción', 'Fantasía', 'Comedia']);
-x.crearEncuesta('¿Cuál disciplina de baile te gusta más?', ['Clásica', 'Ballroom', 'Danza contemporanea', 'Danza urbana']);
-x.crearEncuesta('¿Tanganinca o Tangananá?', ['Tangananica', 'Tangananá']);
-x.crearEncuesta('¿Cuál es tu signo del zodiaco?', ['Aries', 'Tauro', 'Géminis', 'Cáncer', 'Leo', 'Virgo','Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis']);
-x.crearEncuesta('¿Cuál es tu comida favorita?', ['Casera Chilena', 'Peruana', 'China', 'Francesa', 'Italiana', 'Japonesa', 'Comida Rápida']);
-x.crearEncuesta('¿Fumas?', ['Si', 'No', 'fumar qué?']);
-
-x.votar(0, 1)
-x.votar(0, 2)
+encuestas.votar(0, 1)
+encuestas.votar(0, 2)
 
 
